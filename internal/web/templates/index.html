@@ -1,11 +1,13 @@
 {{ define "index.html" }}
 </head>
 <body>
-
+<br>
 <div class="container-lg">
-  <div class="row">
-      Test
-    </div>
+  <div class="row-md">
+    {{ range .AddrMap }}
+    <a href="/scan/?addr={{ .Addr }}">{{ .Addr }}</a>
+    {{ end }}
+  </div>
 </div>
 
 {{ template "footer.html" }}

@@ -9,6 +9,7 @@ import (
 
 	"github.com/aceberg/WatchYourPorts/internal/check"
 	"github.com/aceberg/WatchYourPorts/internal/conf"
+	"github.com/aceberg/WatchYourPorts/internal/models"
 )
 
 // Gui - start web server
@@ -29,6 +30,7 @@ func Gui(dirPath, nodePath string) {
 	log.Println("INFO: starting web gui with config", appConfig)
 
 	// db.Create(appConfig.DBPath)
+	tmpFill()
 
 	address := appConfig.Host + ":" + appConfig.Port
 
@@ -46,9 +48,28 @@ func Gui(dirPath, nodePath string) {
 
 	router.GET("/", indexHandler)         // index.go
 	router.GET("/config/", configHandler) // config.go
+	router.GET("/scan/", scanHandler)     // scanpage.go
 
-	router.POST("/config/", saveConfigHandler) // config.go
+	router.POST("/config/", saveConfigHandler)    // config.go
+	router.POST("/scan_ports/", scanPortsHandler) // scanpage.go
 
 	err := router.Run(address)
 	check.IfError(err)
+}
+
+func tmpFill() {
+	var oneAddr models.AddrToScan
+
+	oneAddr.PortMap = make(map[int]models.PortItem)
+	allAddrs = make(map[string]models.AddrToScan)
+
+	oneAddr.Name = "Onslaught"
+	oneAddr.Addr = "192.168.2.3"
+
+	allAddrs[oneAddr.Addr] = oneAddr
+
+	oneAddr.Name = "BlastOff"
+	oneAddr.Addr = "192.168.2.2"
+
+	allAddrs[oneAddr.Addr] = oneAddr
 }

@@ -1,0 +1,42 @@
+{{ define "scan.html" }}
+</head>
+<body>
+<br>
+<div class="container-lg">
+  <div class="row">
+    <div class="col-md">
+      <h3>{{ .OneAddr.Name }}: {{ .OneAddr.Addr }}</h3>
+    </div>
+    <div class="col-md">
+      <form action="/scan_ports/" method="post" class="input-group">
+        <input name="begin" type="text" class="form-control" placeholder="1">
+        <input name="addr" type="hidden" class="form-control" value="{{ .OneAddr.Addr }}">
+        <input name="end" type="text" class="form-control" placeholder="65535">
+        <button type="submit" class="btn btn-success">Scan</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <th>Name</th>
+          <th>Port</th>
+          <th>State</th>
+          <th>Watch</th>
+        </thead>
+      {{ range .OneAddr.PortMap }}
+        <tr>
+          <td>{{ .Name }}</td>
+          <td>{{ .Port }}</td>
+          <td>{{ .State }}</td>
+          <td>{{ .Watch }}</td>
+        </tr>
+      {{ end }}
+      </table>
+    </div>
+  </div>
+</div>
+
+{{ template "footer.html" }}
+{{ end }}
