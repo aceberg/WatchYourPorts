@@ -22,6 +22,7 @@ func Gui(dirPath, nodePath string) {
 
 	appConfig.DirPath = dirPath
 	appConfig.DBPath = dirPath + "/sqlite.db"
+	appConfig.YamlPath = dirPath + "/hosts.yaml"
 	check.Path(appConfig.DBPath)
 	appConfig.ConfPath = confPath
 	appConfig.NodePath = nodePath
@@ -62,6 +63,7 @@ func tmpFill() {
 
 	oneAddr.PortMap = make(map[int]models.PortItem)
 	allAddrs = make(map[string]models.AddrToScan)
+	toWriteAddrs = make(map[string]models.AddrToScan)
 
 	oneAddr.Name = "Onslaught"
 	oneAddr.Addr = "192.168.2.3"

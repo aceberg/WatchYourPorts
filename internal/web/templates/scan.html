@@ -16,8 +16,10 @@
       </form>
     </div>
   </div>
+  <br>
   <div class="row">
     <div class="col-md table-responsive">
+      <form action="/scan_save/" method="post">
       <table class="table table-striped">
         <thead>
           <th>Name</th>
@@ -27,13 +29,35 @@
         </thead>
       {{ range .OneAddr.PortMap }}
         <tr>
-          <td>{{ .Name }}</td>
-          <td>{{ .Port }}</td>
-          <td>{{ .State }}</td>
-          <td>{{ .Watch }}</td>
+          <td>
+            <input name="name" type="text" class="form-control" value="{{ .Name }}">
+          </td>
+          <td>
+            <a href="http://{{ $.OneAddr.Addr }}:{{ .Port }}">{{ .Port }}</a>
+            <input name="port" type="hidden" value="{{ .Port }}">
+            <input name="state" type="hidden" value="{{ .State }}">
+          </td>
+          <td>
+            {{ if .State }}
+            <i class="bi bi-check-circle-fill" style="color:greenyellow;"></i>
+            {{ else }}
+            <i class="bi bi-dash-circle-fill" style="color:red;"></i>
+            {{ end }}
+          </td>
+          <td>
+            <div class="form-check form-switch">
+              {{ if .Watch }}
+              <input class="form-check-input" type="checkbox" name="watch" checked>
+              {{ else }}
+              <input class="form-check-input" type="checkbox" name="watch">
+              {{ end }}
+          </div>
+          </td>
         </tr>
       {{ end }}
       </table>
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
     </div>
   </div>
 </div>

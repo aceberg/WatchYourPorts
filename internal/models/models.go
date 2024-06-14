@@ -9,6 +9,7 @@ type Conf struct {
 	DBPath   string
 	DirPath  string
 	ConfPath string
+	YamlPath string
 	NodePath string
 }
 
