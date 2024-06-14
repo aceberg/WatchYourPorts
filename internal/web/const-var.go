@@ -10,8 +10,7 @@ var (
 	// appConfig - config for Web Gui
 	appConfig models.Conf
 
-	allAddrs     map[string]models.AddrToScan
-	toWriteAddrs map[string]models.AddrToScan
+	allAddrs map[string]models.AddrToScan
 )
 
 // templFS - html templates

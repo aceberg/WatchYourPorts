@@ -19,7 +19,8 @@
   <br>
   <div class="row">
     <div class="col-md table-responsive">
-      <form action="/scan_save/" method="post">
+      <form action="/scan_save/" method="post" class="form">
+        <input name="addr" type="hidden" value="{{ .OneAddr.Addr }}">
       <table class="table table-striped">
         <thead>
           <th>Name</th>
@@ -47,9 +48,9 @@
           <td>
             <div class="form-check form-switch">
               {{ if .Watch }}
-              <input class="form-check-input" type="checkbox" name="watch" checked>
+              <input class="form-check-input" type="checkbox" value="{{ .Port }}" name="watch" checked>
               {{ else }}
-              <input class="form-check-input" type="checkbox" name="watch">
+              <input class="form-check-input" type="checkbox" value="{{ .Port }}" name="watch">
               {{ end }}
           </div>
           </td>
