@@ -3,10 +3,47 @@
 <body>
 <br>
 <div class="container-lg">
-  <div class="row-md">
-    {{ range .AddrMap }}
-    <a href="/scan/?addr={{ .Addr }}">{{ .Addr }}</a>
-    {{ end }}
+  <div class="row">
+    <div class="col-md">
+      <form action="/addr_add/" method="post" class="input-group">
+        <input name="name" type="text" class="form-control" placeholder="Name">
+        <input name="addr" type="text" class="form-control" placeholder="Address">
+        <button type="submit" class="btn btn-success">Add</button>
+      </form>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md">
+      <div class="card border-primary">
+        <div class="card-body table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <th>Name</th>
+              <th>Addr</th>
+              <th>Total</th>
+              <th>Watching</th>
+              <th>Online</th>
+              <th>Offline</th>
+            </thead>
+            {{ range .AddrMap }}
+            <tr>
+              <td>
+                <a href="/scan/?addr={{ .Addr }}">{{ .Name }}</a>
+              </td>
+              <td>
+                <a href="/scan/?addr={{ .Addr }}">{{ .Addr }}</a>
+              </td>
+              <td>{{ .Total }}</td>
+              <td>{{ .Watching }}</td>
+              <td>{{ .Online }}</td>
+              <td>{{ .Offline }}</td>
+            </tr>
+            {{ end }}
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

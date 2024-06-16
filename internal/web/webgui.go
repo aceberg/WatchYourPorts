@@ -32,7 +32,6 @@ func Gui(dirPath, nodePath string) {
 	log.Println("INFO: starting web gui with config", appConfig)
 
 	// db.Create(appConfig.DBPath)
-	// tmpFill()
 	allAddrs = yaml.Read(appConfig.YamlPath)
 
 	address := appConfig.Host + ":" + appConfig.Port
@@ -53,6 +52,7 @@ func Gui(dirPath, nodePath string) {
 	router.GET("/config/", configHandler) // config.go
 	router.GET("/scan/", scanHandler)     // scanpage.go
 
+	router.POST("/addr_add/", addHandler)         // addr.go
 	router.POST("/config/", saveConfigHandler)    // config.go
 	router.POST("/scan_ports/", scanPortsHandler) // scanpage.go
 	router.POST("/scan_save/", scanSaveHandler)   // scanpage.go

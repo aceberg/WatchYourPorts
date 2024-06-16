@@ -23,9 +23,13 @@ type PortItem struct {
 
 // AddrToScan - one addr to scan
 type AddrToScan struct {
-	Name    string
-	Addr    string
-	PortMap map[int]PortItem
+	Name     string
+	Addr     string
+	Total    int
+	Watching int
+	Online   int
+	Offline  int
+	PortMap  map[int]PortItem
 }
 
 // GuiData - web gui data

@@ -20,13 +20,7 @@ func scanHandler(c *gin.Context) {
 
 	addr, ok := c.GetQuery("addr")
 	if ok {
-		for _, oneAddr := range allAddrs {
-			if oneAddr.Addr == addr {
-				guiData.OneAddr = oneAddr
-				break
-			}
-		}
-
+		guiData.OneAddr = allAddrs[addr]
 	}
 
 	c.HTML(http.StatusOK, "header.html", guiData)
@@ -82,14 +76,16 @@ func scanSaveHandler(c *gin.Context) {
 
 	for i, port := range ports {
 		if slices.Contains(watchs, port) {
-
-			onePort.Name = names[i]
-			onePort.Port, _ = strconv.Atoi(port)
-			onePort.State, _ = strconv.ParseBool(states[i])
 			onePort.Watch = true
-
-			tmpMap[onePort.Port] = onePort
+		} else {
+			onePort.Watch = false
 		}
+
+		onePort.Name = names[i]
+		onePort.Port, _ = strconv.Atoi(port)
+		onePort.State, _ = strconv.ParseBool(states[i])
+
+		tmpMap[onePort.Port] = onePort
 	}
 
 	oneAddr := allAddrs[addr]

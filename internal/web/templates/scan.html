@@ -18,50 +18,65 @@
   </div>
   <br>
   <div class="row">
-    <div class="col-md table-responsive">
-      <form action="/scan_save/" method="post" class="form">
-        <input name="addr" type="hidden" value="{{ .OneAddr.Addr }}">
-      <table class="table table-striped">
-        <thead>
-          <th>Name</th>
-          <th>Port</th>
-          <th>State</th>
-          <th>Watch</th>
-        </thead>
-      {{ range .OneAddr.PortMap }}
-        <tr>
-          <td>
-            <input name="name" type="text" class="form-control" value="{{ .Name }}">
-          </td>
-          <td>
-            <a href="http://{{ $.OneAddr.Addr }}:{{ .Port }}">{{ .Port }}</a>
-            <input name="port" type="hidden" value="{{ .Port }}">
-            <input name="state" type="hidden" value="{{ .State }}">
-          </td>
-          <td>
-            {{ if .State }}
-            <i class="bi bi-check-circle-fill" style="color:greenyellow;"></i>
-            {{ else }}
-            <i class="bi bi-dash-circle-fill" style="color:red;"></i>
-            {{ end }}
-          </td>
-          <td>
-            <div class="form-check form-switch">
-              {{ if .Watch }}
-              <input class="form-check-input" type="checkbox" value="{{ .Port }}" name="watch" checked>
+    <div class="card border-primary">
+      <div class="card-body table-responsive">
+        <form action="/scan_save/" method="post" class="form">
+          <input name="addr" type="hidden" value="{{ .OneAddr.Addr }}">
+        <table class="table table-striped">
+          <thead>
+            <th>Name</th>
+            <th>Port</th>
+            <th>State</th>
+            <th>Watch</th>
+            <th>Del</th>
+          </thead>
+        {{ range .OneAddr.PortMap }}
+          <tr id="row{{ .Port }}">
+            <td>
+              <input name="name" type="text" class="form-control" value="{{ .Name }}">
+            </td>
+            <td>
+              <a href="http://{{ $.OneAddr.Addr }}:{{ .Port }}">{{ .Port }}</a>
+              <input name="port" type="hidden" value="{{ .Port }}">
+              <input name="state" type="hidden" value="{{ .State }}">
+            </td>
+            <td>
+              {{ if .State }}
+              <i class="bi bi-check-circle-fill" style="color:greenyellow;"></i>
               {{ else }}
-              <input class="form-check-input" type="checkbox" value="{{ .Port }}" name="watch">
+              <i class="bi bi-dash-circle-fill" style="color:red;"></i>
               {{ end }}
-          </div>
-          </td>
-        </tr>
-      {{ end }}
-      </table>
-        <button type="submit" class="btn btn-success">Save</button>
-      </form>
+            </td>
+            <td>
+              <div class="form-check form-switch">
+                {{ if .Watch }}
+                <input class="form-check-input" type="checkbox" value="{{ .Port }}" name="watch" checked>
+                {{ else }}
+                <input class="form-check-input" type="checkbox" value="{{ .Port }}" name="watch">
+                {{ end }}
+            </div>
+            </td>
+            <td>
+                <a href="#" onclick="delRow('row{{ .Port }}')">
+                  <i class="bi bi-x-circle"></i>
+                </a>
+            </td>
+          </tr>
+        {{ end }}
+        </table>
+          <button type="submit" class="btn btn-success">Save</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+  function delRow(id) {
+    document.getElementById(id).innerHTML = "";
+    // console.log("Row deleted:", id)
+  }
+</script>
 
 {{ template "footer.html" }}
 {{ end }}
