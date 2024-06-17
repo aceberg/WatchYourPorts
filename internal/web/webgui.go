@@ -9,7 +9,6 @@ import (
 
 	"github.com/aceberg/WatchYourPorts/internal/check"
 	"github.com/aceberg/WatchYourPorts/internal/conf"
-	// "github.com/aceberg/WatchYourPorts/internal/models"
 	"github.com/aceberg/WatchYourPorts/internal/yaml"
 )
 
@@ -47,6 +46,8 @@ func Gui(dirPath, nodePath string) {
 	router.SetHTMLTemplate(templ) // templates
 
 	router.StaticFS("/fs/", http.FS(pubFS)) // public
+
+	router.GET("/api/port/:addr/:port", apiPortScan) // api-port.go
 
 	router.GET("/", indexHandler)         // index.go
 	router.GET("/config/", configHandler) // config.go

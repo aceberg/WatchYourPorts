@@ -24,15 +24,13 @@ func indexHandler(c *gin.Context) {
 			value.Total++
 			if p.Watch {
 				value.Watching++
-			}
-			if p.State {
-				value.Online++
-			} else {
-				value.Offline++
+				if p.State {
+					value.Online++
+				} else {
+					value.Offline++
+				}
 			}
 		}
-		// log.Println("KEY =", key)
-		// log.Println("VALUE =", value)
 
 		allAddrs[key] = value
 	}

@@ -9,11 +9,11 @@
       <h3>{{ .OneAddr.Name }}: {{ .OneAddr.Addr }}</h3>
     </div>
     <div class="col-md">
-      <form class="input-group">
-        <input id="begin" name="begin" type="text" class="form-control" placeholder="1">
+      <form action="/scan_ports/" method="post" class="input-group">
+        <input name="begin" type="text" class="form-control" placeholder="1">
         <input name="addr" type="hidden" class="form-control" value="{{ .OneAddr.Addr }}">
-        <input id="end" name="end" type="text" class="form-control" placeholder="65535">
-        <button onclick="scanAddr('{{ .OneAddr.Addr }}')" type="submit" class="btn btn-success">Scan</button>
+        <input name="end" type="text" class="form-control" placeholder="65535">
+        <button type="submit" class="btn btn-success">Scan</button>
       </form>
     </div>
   </div>

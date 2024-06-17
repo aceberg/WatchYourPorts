@@ -7,7 +7,8 @@ import (
 	"time"
 )
 
-func isOpen(host string, port int) bool {
+// IsOpen - check one tcp port
+func IsOpen(host string, port int) bool {
 
 	timeout := 3 * time.Second
 	target := fmt.Sprintf("%s:%d", host, port)
@@ -32,7 +33,7 @@ func Scan(host, beginStr, endStr string) (ports []int) {
 	end, _ := strconv.Atoi(endStr)
 
 	for i := begin; i < end+1; i++ {
-		if isOpen(host, i) {
+		if IsOpen(host, i) {
 			ports = append(ports, i)
 		}
 	}
