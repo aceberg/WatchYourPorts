@@ -30,6 +30,9 @@ func Gui(dirPath, nodePath string) {
 
 	allAddrs = yaml.Read(appConfig.YamlPath)
 
+	quitScan = make(chan bool)
+	go routineScan(quitScan)
+
 	address := appConfig.Host + ":" + appConfig.Port
 
 	log.Println("=================================== ")
@@ -51,12 +54,11 @@ func Gui(dirPath, nodePath string) {
 	router.GET("/config/", configHandler) // config.go
 	router.GET("/scan/", scanHandler)     // scanpage.go
 
-	router.POST("/addr_add/", addHandler)         // addr.go
-	router.POST("/addr_del/", delHandler)         // addr.go
-	router.POST("/addr_save/", renameHandler)     // addr.go
-	router.POST("/config/", saveConfigHandler)    // config.go
-	router.POST("/scan_ports/", scanPortsHandler) // scanpage.go
-	router.POST("/scan_save/", scanSaveHandler)   // scanpage.go
+	router.POST("/addr_add/", addHandler)       // addr.go
+	router.POST("/addr_del/", delHandler)       // addr.go
+	router.POST("/addr_save/", renameHandler)   // addr.go
+	router.POST("/config/", saveConfigHandler)  // config.go
+	router.POST("/scan_save/", scanSaveHandler) // scanpage.go
 
 	err := router.Run(address)
 	check.IfError(err)

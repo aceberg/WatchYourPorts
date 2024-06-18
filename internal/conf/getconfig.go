@@ -15,6 +15,7 @@ func Get(path string) models.Conf {
 	viper.SetDefault("PORT", "8853")
 	viper.SetDefault("THEME", "superhero")
 	viper.SetDefault("COLOR", "light")
+	viper.SetDefault("TIMEOUT", 10)
 
 	viper.SetConfigFile(path)
 	viper.SetConfigType("yaml")
@@ -27,6 +28,7 @@ func Get(path string) models.Conf {
 	config.Port, _ = viper.Get("PORT").(string)
 	config.Theme, _ = viper.Get("THEME").(string)
 	config.Color, _ = viper.Get("COLOR").(string)
+	config.Timeout = viper.GetInt("TIMEOUT")
 
 	return config
 }
@@ -41,6 +43,7 @@ func Write(config models.Conf) {
 	viper.Set("port", config.Port)
 	viper.Set("theme", config.Theme)
 	viper.Set("color", config.Color)
+	viper.Set("timeout", config.Timeout)
 
 	err := viper.WriteConfig()
 	check.IfError(err)

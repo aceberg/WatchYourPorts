@@ -37,7 +37,12 @@
               <td>{{ .Total }}</td>
               <td>{{ .Watching }}</td>
               <td>{{ .Online }}</td>
-              <td>{{ .Offline }}</td>
+              <td>{{ if eq .Offline 0 }}
+                <span style="color:var(--bs-success);">0</span>
+                {{ else }}
+                <span style="color:var(--bs-danger);">{{ .Offline }}</span>
+                {{ end }}
+              </td>
             </tr>
             {{ end }}
           </table>

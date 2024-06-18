@@ -11,6 +11,9 @@ var (
 	appConfig models.Conf
 
 	allAddrs map[string]models.AddrToScan
+
+	// quitScan - send stop signal to routineScan
+	quitScan chan bool
 )
 
 // templFS - html templates

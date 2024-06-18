@@ -7,7 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/aceberg/WatchYourPorts/internal/port"
+	"github.com/aceberg/WatchYourPorts/internal/scan"
 )
 
 func apiPortScan(c *gin.Context) {
@@ -21,7 +21,7 @@ func apiPortScan(c *gin.Context) {
 
 		onePort := allAddrs[addr].PortMap[pInt]
 		onePort.Port = pInt
-		onePort.State = port.IsOpen(addr, pInt)
+		onePort.State = scan.IsOpen(addr, pInt)
 
 		c.IndentedJSON(http.StatusOK, onePort)
 	}

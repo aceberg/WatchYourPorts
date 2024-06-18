@@ -41,7 +41,7 @@ async function scanAddr() {
         document.getElementById("curPort").innerHTML = "Scanning port "+i;
 
         if ((port.State) && (!savedPorts.includes(port.Port.toString()))) {
-            html = createHTML(port);
+            html = createHTML(port, true);
             document.getElementById('tBody').insertAdjacentHTML('afterbegin', html);
         }
     }
@@ -49,18 +49,25 @@ async function scanAddr() {
     document.getElementById('stopBtn').style.visibility = "hidden";
 }
 
-function createHTML(port) {
+function createHTML(port, found) {
     let state = ``;
     let checked = ``;
+    let sup = ``;
 
-    if (port.State) {
-        state = `<i class="bi bi-check-circle-fill" style="color:var(--bs-success);"></i>`;
-    } else {
-        state = `<i class="bi bi-dash-circle-fill" style="color:var(--bs-danger);"></i>`;
+    if (found) {
+        sup = `&nbsp;<sup style="background-color:var(--bs-danger);">new</sup>`;
     }
 
     if (port.Watch) {
         checked = `checked`;
+
+        if (port.State) {
+            state = `<i class="bi bi-check-circle-fill" style="color:var(--bs-success);"></i>`;
+        } else {
+            state = `<i class="bi bi-dash-circle-fill" style="color:var(--bs-danger);"></i>`;
+        }
+    } else {
+        state = `<i class="bi bi-circle-fill"></i>`;
     }
 
     let html = `
@@ -69,7 +76,7 @@ function createHTML(port) {
             <input name="name" type="text" class="form-control" value="${port.Name}">
         </td>
         <td>
-            <a href="http://${addr}:${port.Port}">${port.Port}</a>
+            <a href="http://${addr}:${port.Port}">${port.Port}</a>${sup}
             <input name="port" type="hidden" value="${port.Port}">
             <input name="state" type="hidden" value="${port.State}">
         </td>

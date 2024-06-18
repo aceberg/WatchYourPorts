@@ -3,6 +3,7 @@ package web
 import (
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 
@@ -33,6 +34,11 @@ func saveConfigHandler(c *gin.Context) {
 	appConfig.Port = c.PostForm("port")
 	appConfig.Theme = c.PostForm("theme")
 	appConfig.Color = c.PostForm("color")
+	tStr := c.PostForm("timeout")
+
+	if tStr != "" {
+		appConfig.Timeout, _ = strconv.Atoi(tStr)
+	}
 
 	conf.Write(appConfig)
 

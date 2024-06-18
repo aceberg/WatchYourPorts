@@ -10,6 +10,7 @@ type Conf struct {
 	ConfPath string
 	YamlPath string
 	NodePath string
+	Timeout  int
 }
 
 // PortItem - one port
