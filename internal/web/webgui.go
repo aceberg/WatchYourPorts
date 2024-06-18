@@ -21,16 +21,13 @@ func Gui(dirPath, nodePath string) {
 	appConfig = conf.Get(confPath)
 
 	appConfig.DirPath = dirPath
-	appConfig.DBPath = dirPath + "/sqlite.db"
 	appConfig.YamlPath = dirPath + "/hosts.yaml"
-	check.Path(appConfig.DBPath)
 	appConfig.ConfPath = confPath
 	appConfig.NodePath = nodePath
 
 	// log.Println("INFO: starting web gui with config", appConfig.ConfPath)
 	log.Println("INFO: starting web gui with config", appConfig)
 
-	// db.Create(appConfig.DBPath)
 	allAddrs = yaml.Read(appConfig.YamlPath)
 
 	address := appConfig.Host + ":" + appConfig.Port
@@ -55,6 +52,8 @@ func Gui(dirPath, nodePath string) {
 	router.GET("/scan/", scanHandler)     // scanpage.go
 
 	router.POST("/addr_add/", addHandler)         // addr.go
+	router.POST("/addr_del/", delHandler)         // addr.go
+	router.POST("/addr_save/", renameHandler)     // addr.go
 	router.POST("/config/", saveConfigHandler)    // config.go
 	router.POST("/scan_ports/", scanPortsHandler) // scanpage.go
 	router.POST("/scan_save/", scanSaveHandler)   // scanpage.go

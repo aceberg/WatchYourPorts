@@ -1,23 +1,71 @@
 {{ define "scan.html" }}
 </head>
 <script src="/fs/public/js/scan.js"></script>
+<link rel="stylesheet" type="text/css" href="/fs/public/css/index.css" />
 <body>
+<!-- Add Edit Modal -->
+<div class="modal" id="mEdit">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/addr_save/" method="post" class="form">
+          <table class="table table-borderless">
+            <tr>
+              <td>Name</td>
+              <td>
+                <input name="name" type="text" class="form-control" value="{{ .OneAddr.Name }}">
+              </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>
+                <input name="addr" type="text" class="form-control" value="{{ .OneAddr.Addr }}" readonly>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+              </td>
+              <td>
+                <form action="/addr_del/" method="post" class="form">
+                  <input name="addr" type="hidden" class="form-control" value="{{ .OneAddr.Addr }}">
+                  <button type="submit" class="btn btn-danger" style="float: right;">Delete this Address</button>
+                </form>
+              </td>
+            </tr>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
 <br>
 <div class="container-lg">
   <div class="row">
     <div class="col-md">
-      <h3>{{ .OneAddr.Name }}: {{ .OneAddr.Addr }}</h3>
+      <h3>{{ .OneAddr.Name }}: {{ .OneAddr.Addr }}
+        <button class="btn my-button" title="Edit" data-bs-toggle="modal" data-bs-target="#mEdit">
+          <i class="bi bi-pencil-fill"></i>
+        </button>
+      </h3>
     </div>
     <div class="col-md">
       <form class="input-group">
-        <input id="begin" name="begin" type="text" class="form-control" placeholder="1">
-        <input name="addr" type="hidden" class="form-control" value="{{ .OneAddr.Addr }}">
-        <input id="end" name="end" type="text" class="form-control" placeholder="65535">
-        <button onclick="scanAddr('{{ .OneAddr.Addr }}')" type="submit" class="btn btn-success">Scan</button>
+        <input id="begin" type="text" class="form-control" placeholder="1">
+        <input id="end" type="text" class="form-control" placeholder="65535">
+        <button onclick="scanAddr()" type="button" class="btn btn-success">Scan</button>
       </form>
-      <button onclick="scanAddr('{{ .OneAddr.Addr }}')" type="submit" class="btn btn-success">Scan2</button>
-      <div id="curPort"></div>
-      <button onclick="stopScan()" type="button" class="btn btn-danger">Stop</button>
+      <div style="display: flex; justify-content: space-between; visibility: hidden;" id="stopBtn">
+        <button onclick="stopScan()" type="button" class="btn btn-warning">Stop</button>
+        <div id="curPort"></div>
+      </div>
     </div>
   </div>
   <br>
@@ -28,10 +76,10 @@
           <input name="addr" type="hidden" value="{{ .OneAddr.Addr }}">
         <table class="table table-striped">
           <thead>
-            <th>Name</th>
-            <th>Port</th>
-            <th>State</th>
-            <th>Watch</th>
+            <th>Name <i class="bi bi-sort-down-alt" onclick="sortBy('Name')"></i></th>
+            <th>Port <i class="bi bi-sort-down-alt" onclick="sortBy('Port')"></i></th>
+            <th>State <i class="bi bi-sort-down-alt" onclick="sortBy('State')"></i></th>
+            <th>Watch <i class="bi bi-sort-down-alt" onclick="sortBy('Watch')"></i></th>
             <th>Del</th>
           </thead>
           <tbody id="tBody"></tbody>

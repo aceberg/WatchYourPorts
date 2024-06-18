@@ -6,7 +6,6 @@ type Conf struct {
 	Port     string
 	Theme    string
 	Color    string
-	DBPath   string
 	DirPath  string
 	ConfPath string
 	YamlPath string
@@ -25,11 +24,11 @@ type PortItem struct {
 type AddrToScan struct {
 	Name     string
 	Addr     string
+	PortMap  map[int]PortItem
 	Total    int
 	Watching int
 	Online   int
 	Offline  int
-	PortMap  map[int]PortItem
 }
 
 // GuiData - web gui data

@@ -1,5 +1,8 @@
+var addr = '';
 var stop = false;
 var portMap = {};
+var portArray = [];
+var oldField = '';
 
 function delRow(id) {
     document.getElementById(id).innerHTML = "";
@@ -9,7 +12,7 @@ function stopScan() {
     stop = true;
 }
 
-async function scanAddr(addr) {
+async function scanAddr() {
     let begin = document.getElementById("begin").value;
     let end = document.getElementById("end").value;
 
@@ -22,6 +25,10 @@ async function scanAddr(addr) {
     let port = {};
     stop = false;
 
+    let savedPorts = Object.keys(portMap);
+    // console.log("Saved ports:", savedPorts);
+    document.getElementById('stopBtn').style.visibility = "visible";
+
     for (let i = begin ; i <= end; i++) {
 
         if (stop) {
@@ -33,13 +40,28 @@ async function scanAddr(addr) {
 
         document.getElementById("curPort").innerHTML = "Scanning port "+i;
 
-        if (port.State) {
-            createHTML(addr, port);
+        if ((port.State) && (!savedPorts.includes(port.Port.toString()))) {
+            html = createHTML(port);
+            document.getElementById('tBody').insertAdjacentHTML('afterbegin', html);
         }
     }
+
+    document.getElementById('stopBtn').style.visibility = "hidden";
 }
 
-function createHTML(addr, port) {
+function createHTML(port) {
+    let state = ``;
+    let checked = ``;
+
+    if (port.State) {
+        state = `<i class="bi bi-check-circle-fill" style="color:var(--bs-success);"></i>`;
+    } else {
+        state = `<i class="bi bi-dash-circle-fill" style="color:var(--bs-danger);"></i>`;
+    }
+
+    if (port.Watch) {
+        checked = `checked`;
+    }
 
     let html = `
     <tr id="row${port.Port}">
@@ -52,10 +74,12 @@ function createHTML(addr, port) {
             <input name="state" type="hidden" value="${port.State}">
         </td>
         <td>
-            ${port.State}
+            ${state}
         </td>
         <td>
-            ${port.Watch}
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" value="${port.Port}" name="watch" ${checked}>
+            </div>
         </td>
         <td>
             <a href="#" onclick="delRow('row${port.Port}')">
@@ -63,16 +87,48 @@ function createHTML(addr, port) {
             </a>
         </td>
     </tr>`;
-    document.getElementById('tBody').insertAdjacentHTML('beforeend', html);
+    
+    return html;
 }
 
-async function loadSavedPorts(addr) {
-    document.getElementById('tBody').innerHTML = "";
+async function loadSavedPorts(addr1) {
 
+    addr = addr1;
+    
     let url = '/api/addr/'+addr;
     portMap = await (await fetch(url)).json();
+    portArray = Object.values(portMap);
 
-    for (let port of Object.values(portMap)){
-        createHTML(addr, port);
+    displaySavedPorts();
+}
+
+function displaySavedPorts() {
+    document.getElementById('tBody').innerHTML = "";
+
+    for (let port of portArray){
+        html = createHTML(port);
+        document.getElementById('tBody').insertAdjacentHTML('beforeend', html);
     }
+}
+
+function sortBy(field) {
+    console.log("Field =", field);
+
+    if (field != oldField) {
+        portArray.sort(byFieldDown(field));
+        oldField = field;
+    } else {
+        portArray.sort(byFieldUp(field));
+        oldField = '';
+    }
+
+    displaySavedPorts();
+}
+
+function byFieldUp(fieldName){
+    return (a, b) => a[fieldName] < b[fieldName] ? 1 : -1;
+}
+
+function byFieldDown(fieldName){
+    return (a, b) => a[fieldName] > b[fieldName] ? 1 : -1;
 }
