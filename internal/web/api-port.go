@@ -26,3 +26,10 @@ func apiPortScan(c *gin.Context) {
 		c.IndentedJSON(http.StatusOK, onePort)
 	}
 }
+
+func apiAddrPortMap(c *gin.Context) {
+
+	addr := c.Param("addr")
+
+	c.IndentedJSON(http.StatusOK, allAddrs[addr].PortMap)
+}
