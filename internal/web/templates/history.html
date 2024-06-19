@@ -1,0 +1,44 @@
+{{ define "history.html" }}
+</head>
+<body>
+<br>
+<div class="container-lg">
+  <div class="row">
+    <div class="col-md">
+      <div class="card border-primary">
+        <div class="card-body table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <th>Name</th>
+              <th>Addr</th>
+              <th>Port</th>
+              <th>PortName</th>
+              <th style="width: 100%;">State</th>
+            </thead>
+            <tbody>
+              {{ range .History }}
+              <tr>
+                <td><a href="/scan/?addr={{ .Addr }}">{{ .Name }}</a></td>
+                <td><a href="/scan/?addr={{ .Addr }}">{{ .Addr }}</a></td>
+                <td><a href="http://{{ .Addr }}:{{ .Port }}">{{ .Port }}</a></td>
+                <td><a href="http://{{ .Addr }}:{{ .Port }}">{{ .PortName }}</a></td>
+                <td>{{ range .State }}
+                  {{ if .State }}
+                  <i class="bi bi-check-circle-fill" style="color:var(--bs-success);" title="{{ .Date }}"></i>
+                  {{ else }}
+                  <i class="bi bi-dash-circle-fill" style="color:var(--bs-danger);" title="{{ .Date }}"></i>
+                  {{ end }}
+                {{ end }}
+                </td>
+              </tr>
+              {{ end }}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{ template "footer.html" }}
+{{ end }}

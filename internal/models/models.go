@@ -32,6 +32,21 @@ type AddrToScan struct {
 	Offline  int
 }
 
+// HistState - one history state
+type HistState struct {
+	Date  string
+	State bool
+}
+
+// HistData - all data for Addr:Port
+type HistData struct {
+	Name     string
+	Addr     string
+	Port     int
+	PortName string
+	State    []HistState
+}
+
 // GuiData - web gui data
 type GuiData struct {
 	Config  Conf
@@ -39,4 +54,5 @@ type GuiData struct {
 	Version string
 	AddrMap map[string]AddrToScan
 	OneAddr AddrToScan
+	History map[string]HistData
 }

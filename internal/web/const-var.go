@@ -14,6 +14,8 @@ var (
 
 	// quitScan - send stop signal to routineScan
 	quitScan chan bool
+
+	histAll map[string]models.HistData
 )
 
 // templFS - html templates

@@ -2,10 +2,11 @@ package web
 
 import (
 	"log"
+	"strconv"
 	"time"
 
+	"github.com/aceberg/WatchYourPorts/internal/models"
 	"github.com/aceberg/WatchYourPorts/internal/scan"
-	// "github.com/aceberg/WatchYourPorts/internal/yaml"
 )
 
 func routineScan(quit chan bool) {
@@ -46,6 +47,21 @@ func startScan() {
 				port.State = scan.IsOpen(addr.Addr, port.Port)
 				tmpPortMap[port.Port] = port
 				changed = true
+
+				// History
+				portStr := strconv.Itoa(port.Port)
+				oneHist := histAll[addr.Addr+":"+portStr]
+				oneHist.Name = addr.Name
+				oneHist.Addr = addr.Addr
+				oneHist.Port = port.Port
+				oneHist.PortName = port.Name
+				oneHist.State = append(oneHist.State,
+					models.HistState{
+						Date:  time.Now().Format("2006-01-02 15:04:05"),
+						State: port.State,
+					},
+				)
+				histAll[addr.Addr+":"+portStr] = oneHist
 			}
 		}
 
