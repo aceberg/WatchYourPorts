@@ -5,12 +5,17 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/aceberg/WatchYourPorts/internal/influx"
 	"github.com/aceberg/WatchYourPorts/internal/models"
 	"github.com/aceberg/WatchYourPorts/internal/scan"
 )
 
 func routineScan(quit chan bool) {
 	var lastDate time.Time
+
+	if appConfig.Timeout == 0 {
+		appConfig.Timeout = 10
+	}
 
 	for {
 		select {
@@ -55,6 +60,7 @@ func startScan() {
 				oneHist.Addr = addr.Addr
 				oneHist.Port = port.Port
 				oneHist.PortName = port.Name
+				oneHist.NowState = port.State
 				oneHist.State = append(oneHist.State,
 					models.HistState{
 						Date:  time.Now().Format("2006-01-02 15:04:05"),
@@ -62,6 +68,10 @@ func startScan() {
 					},
 				)
 				histAll[addr.Addr+":"+portStr] = oneHist
+
+				if appConfig.InfluxEnable {
+					influx.Add(appConfig, oneHist)
+				}
 			}
 		}
 

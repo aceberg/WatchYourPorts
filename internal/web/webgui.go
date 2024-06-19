@@ -58,11 +58,12 @@ func Gui(dirPath, nodePath string) {
 	router.GET("/history/", historyHandler) // history.go
 	router.GET("/scan/", scanHandler)       // scanpage.go
 
-	router.POST("/addr_add/", addHandler)       // addr.go
-	router.POST("/addr_del/", delHandler)       // addr.go
-	router.POST("/addr_save/", renameHandler)   // addr.go
-	router.POST("/config/", saveConfigHandler)  // config.go
-	router.POST("/scan_save/", scanSaveHandler) // scanpage.go
+	router.POST("/addr_add/", addHandler)             // addr.go
+	router.POST("/addr_del/", delHandler)             // addr.go
+	router.POST("/addr_save/", renameHandler)         // addr.go
+	router.POST("/config/", saveConfigHandler)        // config.go
+	router.POST("/config_influx/", saveInfluxHandler) // config.go
+	router.POST("/scan_save/", scanSaveHandler)       // scanpage.go
 
 	err := router.Run(address)
 	check.IfError(err)

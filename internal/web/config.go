@@ -35,14 +35,45 @@ func saveConfigHandler(c *gin.Context) {
 	appConfig.Theme = c.PostForm("theme")
 	appConfig.Color = c.PostForm("color")
 	tStr := c.PostForm("timeout")
+	hStr := c.PostForm("trim")
 
 	if tStr != "" {
 		appConfig.Timeout, _ = strconv.Atoi(tStr)
+	}
+	if hStr != "" {
+		appConfig.HistTrim, _ = strconv.Atoi(hStr)
 	}
 
 	conf.Write(appConfig)
 
 	log.Println("INFO: writing new config to", appConfig.ConfPath)
+
+	c.Redirect(http.StatusFound, "/config")
+}
+
+func saveInfluxHandler(c *gin.Context) {
+
+	appConfig.InfluxAddr = c.PostForm("addr")
+	appConfig.InfluxToken = c.PostForm("token")
+	appConfig.InfluxOrg = c.PostForm("org")
+	appConfig.InfluxBucket = c.PostForm("bucket")
+	enable := c.PostForm("enable")
+	skip := c.PostForm("skip")
+
+	if enable == "on" {
+		appConfig.InfluxEnable = true
+	} else {
+		appConfig.InfluxEnable = false
+	}
+	if skip == "on" {
+		appConfig.InfluxSkipTLS = true
+	} else {
+		appConfig.InfluxSkipTLS = false
+	}
+
+	// conf.Write(appConfig)
+
+	log.Println("INFO: writing new config to", appConfig)
 
 	c.Redirect(http.StatusFound, "/config")
 }

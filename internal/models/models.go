@@ -2,15 +2,22 @@ package models
 
 // Conf - web gui config
 type Conf struct {
-	Host     string
-	Port     string
-	Theme    string
-	Color    string
-	DirPath  string
-	ConfPath string
-	YamlPath string
-	NodePath string
-	Timeout  int
+	Host          string
+	Port          string
+	Theme         string
+	Color         string
+	DirPath       string
+	ConfPath      string
+	YamlPath      string
+	NodePath      string
+	Timeout       int
+	HistTrim      int
+	InfluxAddr    string
+	InfluxToken   string
+	InfluxOrg     string
+	InfluxBucket  string
+	InfluxEnable  bool
+	InfluxSkipTLS bool
 }
 
 // PortItem - one port
@@ -45,6 +52,7 @@ type HistData struct {
 	Port     int
 	PortName string
 	State    []HistState
+	NowState bool
 }
 
 // GuiData - web gui data
