@@ -67,7 +67,7 @@ function createHTML(port, found) {
             state = `<i class="bi bi-dash-circle-fill" style="color:var(--bs-danger);"></i>`;
         }
     } else {
-        state = `<i class="bi bi-circle-fill"></i>`;
+        state = `<i class="bi bi-circle-fill" style="color:var(--bs-gray-500);"></i>`;
     }
 
     let html = `

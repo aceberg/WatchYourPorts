@@ -1,7 +1,7 @@
 package web
 
 import (
-	"log"
+	"log/slog"
 	"net/http"
 	"strconv"
 
@@ -46,7 +46,7 @@ func saveConfigHandler(c *gin.Context) {
 
 	conf.Write(appConfig)
 
-	log.Println("INFO: writing new config to", appConfig.ConfPath)
+	slog.Info("writing new config to " + appConfig.ConfPath)
 
 	c.Redirect(http.StatusFound, "/config")
 }
@@ -71,9 +71,9 @@ func saveInfluxHandler(c *gin.Context) {
 		appConfig.InfluxSkipTLS = false
 	}
 
-	// conf.Write(appConfig)
+	conf.Write(appConfig)
 
-	log.Println("INFO: writing new config to", appConfig)
+	slog.Info("writing new config to " + appConfig.ConfPath)
 
 	c.Redirect(http.StatusFound, "/config")
 }

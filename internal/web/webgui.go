@@ -2,7 +2,7 @@ package web
 
 import (
 	"html/template"
-	"log"
+	"log/slog"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,8 +26,7 @@ func Gui(dirPath, nodePath string) {
 	appConfig.ConfPath = confPath
 	appConfig.NodePath = nodePath
 
-	// log.Println("INFO: starting web gui with config", appConfig.ConfPath)
-	log.Println("INFO: starting web gui with config", appConfig)
+	slog.Info("config", "path", appConfig.DirPath)
 
 	allAddrs = yaml.Read(appConfig.YamlPath)
 
@@ -38,9 +37,9 @@ func Gui(dirPath, nodePath string) {
 
 	address := appConfig.Host + ":" + appConfig.Port
 
-	log.Println("=================================== ")
-	log.Printf("Web GUI at http://%s", address)
-	log.Println("=================================== ")
+	slog.Info("=================================== ")
+	slog.Info("Web GUI at http://" + address)
+	slog.Info("=================================== ")
 
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()

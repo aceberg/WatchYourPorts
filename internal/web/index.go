@@ -1,12 +1,10 @@
 package web
 
 import (
-	// "log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 
-	// "github.com/aceberg/WatchYourPorts/internal/db"
 	"github.com/aceberg/WatchYourPorts/internal/models"
 )
 

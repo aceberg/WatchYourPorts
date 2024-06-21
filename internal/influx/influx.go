@@ -4,7 +4,7 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
-	"log"
+	// "log"
 	"strings"
 
 	"github.com/influxdata/influxdb-client-go/v2"
@@ -37,7 +37,7 @@ func Add(appConfig models.Conf, oneHist models.HistData) {
 	oneHist.PortName = strings.ReplaceAll(oneHist.PortName, "=", "\\=")
 
 	line := fmt.Sprintf("WatchYourPorts,addr=%s,port=%d,addrName=%s,portName=%s state=%t", oneHist.Addr, oneHist.Port, oneHist.Name, oneHist.PortName, oneHist.NowState)
-	log.Println("LINE:", line)
+	// log.Println("LINE:", line)
 
 	err := writeAPI.WriteRecord(context.Background(), line)
 	check.IfError(err)

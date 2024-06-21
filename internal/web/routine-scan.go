@@ -1,7 +1,7 @@
 package web
 
 import (
-	"log"
+	"log/slog"
 	"strconv"
 	"time"
 
@@ -40,7 +40,7 @@ func routineScan(quit chan bool) {
 func startScan() {
 	var changed bool
 
-	log.Println("Port scan started")
+	slog.Info("port scan started")
 
 	for _, addr := range allAddrs {
 		changed = false
@@ -67,6 +67,12 @@ func startScan() {
 						State: port.State,
 					},
 				)
+				l := len(oneHist.State)
+				if l > appConfig.HistTrim {
+
+					oneHist.State = oneHist.State[l-appConfig.HistTrim : l]
+				}
+
 				histAll[addr.Addr+":"+portStr] = oneHist
 
 				if appConfig.InfluxEnable {
@@ -82,5 +88,5 @@ func startScan() {
 		}
 	}
 
-	log.Println("Port scan done!")
+	slog.Info("port scan done!")
 }

@@ -60,7 +60,7 @@
       <form class="input-group">
         <input id="begin" type="text" class="form-control" placeholder="1">
         <input id="end" type="text" class="form-control" placeholder="65535">
-        <button onclick="scanAddr()" type="button" class="btn btn-success">Scan</button>
+        <button onclick="scanAddr()" type="button" class="btn btn-primary">Scan</button>
       </form>
       <div style="display: flex; justify-content: space-between; visibility: hidden;" id="stopBtn">
         <button onclick="stopScan()" type="button" class="btn btn-warning">Stop</button>
@@ -74,17 +74,23 @@
       <div class="card-body table-responsive">
         <form action="/scan_save/" method="post" class="form">
           <input name="addr" type="hidden" value="{{ .OneAddr.Addr }}">
-        <table class="table table-striped">
-          <thead>
-            <th>Name <i class="bi bi-sort-down-alt" onclick="sortBy('Name')"></i></th>
-            <th>Port <i class="bi bi-sort-down-alt" onclick="sortBy('Port')"></i></th>
-            <th>State <i class="bi bi-sort-down-alt" onclick="sortBy('State')"></i></th>
-            <th>Watch <i class="bi bi-sort-down-alt" onclick="sortBy('Watch')"></i></th>
-            <th>Del</th>
-          </thead>
-          <tbody id="tBody"></tbody>
-        </table>
-          <button type="submit" class="btn btn-success">Save</button>
+          <div class="row">
+            <div class="col-lg-11">
+              <table class="table table-striped">
+                <thead>
+                  <th>Name <i class="bi bi-sort-down-alt" onclick="sortBy('Name')"></i></th>
+                  <th>Port <i class="bi bi-sort-down-alt" onclick="sortBy('Port')"></i></th>
+                  <th>State</th>
+                  <th>Watch <i class="bi bi-sort-down-alt" onclick="sortBy('Watch')"></i></th>
+                  <th>Del</th>
+                </thead>
+                <tbody id="tBody"></tbody>
+              </table>
+            </div>
+            <div class="col-sm">
+              <button type="submit" class="btn btn-outline-primary" style="height: 100%;">Save</button>
+            </div>
+          </div>
         </form>
       </div>
     </div>

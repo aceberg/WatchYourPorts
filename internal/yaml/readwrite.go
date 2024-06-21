@@ -1,7 +1,7 @@
 package yaml
 
 import (
-	"log"
+	"log/slog"
 	"os"
 
 	"gopkg.in/yaml.v3"
@@ -33,5 +33,5 @@ func Write(path string, plans map[string]models.AddrToScan) {
 	err = os.WriteFile(path, yamlData, 0644)
 	check.IfError(err)
 
-	log.Println("INFO: writing new plan file to", path)
+	slog.Info("writing new plan file to " + path)
 }
