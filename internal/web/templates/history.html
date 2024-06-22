@@ -1,38 +1,22 @@
 {{ define "history.html" }}
 </head>
+<script src="/fs/public/js/history.js"></script>
 <body>
-<br>
 <div class="container-lg">
   <div class="row">
-    <div class="col-md">
+    <div class="col-md mt-4 mb-4">
       <div class="card border-primary">
         <div class="card-body table-responsive">
           <table class="table table-striped">
             <thead>
-              <th>Name</th>
-              <th>Addr</th>
-              <th>Port</th>
-              <th>PortName</th>
+              <th style="min-width: 6em;">Name <i class="bi bi-sort-down-alt" onclick="sortBy('Name')"></i></th>
+              <th style="min-width: 6em;">Addr <i class="bi bi-sort-down-alt" onclick="sortBy('Addr')"></i></th>
+              <th style="min-width: 6em;">Port <i class="bi bi-sort-down-alt" onclick="sortBy('Port')"></i></th>
+              <th style="min-width: 10em;">PortName <i class="bi bi-sort-down-alt" onclick="sortBy('PortName')"></i></th>
               <th style="width: 100%;">State</th>
             </thead>
-            <tbody>
-              {{ range .History }}
-              <tr>
-                <td><a href="/scan/?addr={{ .Addr }}">{{ .Name }}</a></td>
-                <td><a href="/scan/?addr={{ .Addr }}">{{ .Addr }}</a></td>
-                <td><a href="http://{{ .Addr }}:{{ .Port }}">{{ .Port }}</a></td>
-                <td><a href="http://{{ .Addr }}:{{ .Port }}">{{ .PortName }}</a></td>
-                <td>{{ range .State }}
-                  {{ if .State }}
-                  <i class="bi bi-check-circle-fill" style="color:var(--bs-success);" title="{{ .Date }}"></i>
-                  {{ else }}
-                  <i class="bi bi-dash-circle-fill" style="color:var(--bs-danger);" title="{{ .Date }}"></i>
-                  {{ end }}
-                {{ end }}
-                </td>
-              </tr>
-              {{ end }}
-            </tbody>
+            <tbody id="tBody"></tbody> 
+            <!-- history.js -->
           </table>
         </div>
       </div>

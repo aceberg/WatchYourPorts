@@ -46,17 +46,16 @@
   </div>
 </div>
 <!-- End Modal -->
-<br>
 <div class="container-lg">
   <div class="row">
-    <div class="col-md">
+    <div class="col-md mt-4">
       <h3>{{ .OneAddr.Name }}: {{ .OneAddr.Addr }}
         <button class="btn my-button" title="Edit" data-bs-toggle="modal" data-bs-target="#mEdit">
           <i class="bi bi-pencil-fill"></i>
         </button>
       </h3>
     </div>
-    <div class="col-md">
+    <div class="col-md mt-4">
       <form class="input-group">
         <input id="begin" type="text" class="form-control" placeholder="1">
         <input id="end" type="text" class="form-control" placeholder="65535">
@@ -71,11 +70,11 @@
   <br>
   <div class="row">
     <div class="card border-primary">
-      <div class="card-body table-responsive">
+      <div class="card-body">
         <form action="/scan_save/" method="post" class="form">
           <input name="addr" type="hidden" value="{{ .OneAddr.Addr }}">
           <div class="row">
-            <div class="col-lg-11">
+            <div class="col-lg-11 table-responsive mb-4">
               <table class="table table-striped">
                 <thead>
                   <th>Name <i class="bi bi-sort-down-alt" onclick="sortBy('Name')"></i></th>
@@ -87,7 +86,7 @@
                 <tbody id="tBody"></tbody>
               </table>
             </div>
-            <div class="col-sm">
+            <div class="col-sm mb-4">
               <button type="submit" class="btn btn-outline-primary" style="height: 100%;">Save</button>
             </div>
           </div>

@@ -32,3 +32,8 @@ func apiAddrPortMap(c *gin.Context) {
 
 	c.IndentedJSON(http.StatusOK, allAddrs[addr].PortMap)
 }
+
+func apiHistory(c *gin.Context) {
+
+	c.IndentedJSON(http.StatusOK, histAll)
+}
