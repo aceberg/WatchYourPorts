@@ -15,6 +15,7 @@ function stopScan() {
 async function scanAddr() {
     let begin = document.getElementById("begin").value;
     let end = document.getElementById("end").value;
+    let savedPorts = [];
 
     if (begin == "") {
         begin = 1
@@ -25,8 +26,11 @@ async function scanAddr() {
     let port = {};
     stop = false;
 
-    let savedPorts = Object.keys(portMap);
+    if (portMap != null) {
+        savedPorts = Object.keys(portMap);
+    }
     // console.log("Saved ports:", savedPorts);
+
     document.getElementById('stopBtn').style.visibility = "visible";
 
     for (let i = begin ; i <= end; i++) {
@@ -104,7 +108,9 @@ async function loadSavedPorts(addr1) {
     
     let url = '/api/addr/'+addr;
     portMap = await (await fetch(url)).json();
-    portArray = Object.values(portMap);
+    if (portMap != null) {
+        portArray = Object.values(portMap);
+    }
 
     displaySavedPorts();
 }

@@ -33,7 +33,9 @@ async function loadHistory() {
     
     let url = '/api/history';
     let histMap = await (await fetch(url)).json();
-    histArray = Object.values(histMap);
+    if (histMap != null) {
+        histArray = Object.values(histMap);
+    }
 
     displayHistory();
 }

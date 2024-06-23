@@ -7,11 +7,11 @@ services:
     - 8850:8850
     volumes:
     - ~/.dockerdata/icons:/app/icons  # For local icons
-  exdiary:
-    image: aceberg/exercisediary
+  wyp:
+    image: aceberg/watchyourports
     restart: unless-stopped
     ports:
-    - 8851:8851
+    - 8853:8853
     command: "-n http://YOUR_IP:8850" # Put your server IP or DNS name here
     depends_on:
       - node-bootstrap
@@ -20,6 +20,6 @@ services:
     environment:
       TZ: Asia/Novosibirsk    # required, default ""
       HOST: "0.0.0.0"         # optional, default: 0.0.0.0
-      PORT: "8851"            # optional, default: 8851
+      PORT: "8853"            # optional, default: 8853
       THEME: "grass"          # optional, default: grass
-      COLOR: "light"          # optional, default: light
+      COLOR: "dark"           # optional, default: dark

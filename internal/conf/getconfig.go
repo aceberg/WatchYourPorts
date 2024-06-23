@@ -13,8 +13,8 @@ func Get(path string) models.Conf {
 
 	viper.SetDefault("HOST", "0.0.0.0")
 	viper.SetDefault("PORT", "8853")
-	viper.SetDefault("THEME", "superhero")
-	viper.SetDefault("COLOR", "light")
+	viper.SetDefault("THEME", "grass")
+	viper.SetDefault("COLOR", "dark")
 	viper.SetDefault("TIMEOUT", 10)
 	viper.SetDefault("HIST_TRIM", 90)
 	viper.SetDefault("INFLUX_ENABLE", false)

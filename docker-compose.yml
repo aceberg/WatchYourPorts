@@ -1,15 +1,15 @@
 version: "3"
 services:
-  exdiary:
-    image: aceberg/exercisediary
+  wyp:
+    image: aceberg/watchyourports
     restart: unless-stopped
     ports:
-    - 8851:8851
+    - 8853:8853
     volumes:
     - ~/.dockerdata/WatchYourPorts:/data/WatchYourPorts
     environment:
       TZ: Asia/Novosibirsk    # required, default: ""
       HOST: "0.0.0.0"         # optional, default: 0.0.0.0
-      PORT: "8851"            # optional, default: 8851
+      PORT: "8853"            # optional, default: 8853
       THEME: "grass"          # optional, default: grass
-      COLOR: "light"          # optional, default: light
+      COLOR: "dark"           # optional, default: dark
