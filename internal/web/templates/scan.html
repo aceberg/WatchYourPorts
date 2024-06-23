@@ -25,7 +25,8 @@
             <tr>
               <td>Address</td>
               <td>
-                <input name="addr" type="text" class="form-control" value="{{ .OneAddr.Addr }}" disabled>
+                <input type="text" class="form-control" value="{{ .OneAddr.Addr }}" disabled>
+                <input name="addr" type="hidden" class="form-control" value="{{ .OneAddr.Addr }}">
               </td>
             </tr>
             <tr>
