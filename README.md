@@ -16,7 +16,8 @@ Open ports monitor. Exports data to InfluxDB2/Grafana
 - [Thanks](https://github.com/aceberg/watchyourports#thanks)
 
 
-![Screenshot](https://raw.githubusercontent.com/aceberg/WatchYourPorts/main/assets/Screenshot%202023-12-25%20at%2023-19-08%20Exercise%20Diary.png)
+![Screenshot](https://raw.githubusercontent.com/aceberg/WatchYourPorts/main/assets/Screenshot1.png)   
+![Screenshot](https://raw.githubusercontent.com/aceberg/WatchYourPorts/main/assets/Screenshot2.png)
 
 ## Quick start
 
