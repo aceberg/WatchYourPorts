@@ -1,0 +1,13 @@
+[Unit]
+Description=WatchYourPorts
+Documentation=https://github.com/aceberg/WatchYourPorts
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=%i
+ExecStart=/usr/bin/WatchYourPorts -d /home/%i/.config/WatchYourPorts/
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

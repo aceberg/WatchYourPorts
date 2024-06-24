@@ -2,10 +2,10 @@ name: Readme-DockerHub
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [ "main" ]
-  #   paths:
-  #   - 'README.md'
+  push:
+    branches: [ "main" ]
+    paths:
+    - 'README.md'
 
 env:
   IMAGE_NAME: watchyourports
