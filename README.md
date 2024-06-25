@@ -7,7 +7,7 @@
     <img src="https://raw.githubusercontent.com/aceberg/watchyourports/main/assets/logo.png" width="35" />
 </a>WatchYourPorts</h1>
 
-Open ports monitor. Exports data to InfluxDB2/Grafana 
+Open ports inventory for local servers. Exports data to InfluxDB2/Grafana 
 
 - [Quick start](https://github.com/aceberg/watchyourports#quick-start)
 - [Config](https://github.com/aceberg/watchyourports#config)
@@ -17,7 +17,11 @@ Open ports monitor. Exports data to InfluxDB2/Grafana
 
 
 ![Screenshot](https://raw.githubusercontent.com/aceberg/WatchYourPorts/main/assets/Screenshot1.png)   
-![Screenshot](https://raw.githubusercontent.com/aceberg/WatchYourPorts/main/assets/Screenshot2.png)
+<details>
+  <summary>More screenshots</summary>
+  <img src="https://raw.githubusercontent.com/aceberg/WatchYourPorts/main/assets/Screenshot2.png">
+  <img src="https://raw.githubusercontent.com/aceberg/WatchYourPorts/main/assets/Screenshot3.png">
+</details> 
 
 ## Quick start
 
@@ -34,7 +38,7 @@ Or use [docker-compose.yml](docker-compose.yml)
 ## Config
 
 
-Configuration can be done through config file or environment variables
+Configuration can be done through `config.yaml` file or GUI, or environment variables
 
 | Variable  | Description | Default |
 | --------  | ----------- | ------- |
