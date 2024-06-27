@@ -2,6 +2,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.1.2] - 2024-06-24
+### Added
+- New themes
+
+### Changed
+- Upd to latest Bottstrap and Icons
+- Deduplicated JS
+
 ## [0.1.1] - 2024-06-24
 ### Added
 - README

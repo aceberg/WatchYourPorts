@@ -37,36 +37,9 @@ async function loadHistory() {
         histArray = Object.values(histMap);
     }
 
-    displayHistory();
-}
-
-function displayHistory() {
-    document.getElementById('tBody').innerHTML = "";
-
-    for (let hist of histArray){
-        html = createHTML(hist);
-        document.getElementById('tBody').insertAdjacentHTML('beforeend', html);
-    }
+    displayArrayData(histArray);
 }
 
 function sortBy(field) {
-    console.log("Field =", field);
-
-    if (field != oldField) {
-        histArray.sort(byFieldDown(field));
-        oldField = field;
-    } else {
-        histArray.sort(byFieldUp(field));
-        oldField = '';
-    }
-
-    displayHistory();
-}
-
-function byFieldUp(fieldName){
-    return (a, b) => a[fieldName] < b[fieldName] ? 1 : -1;
-}
-
-function byFieldDown(fieldName){
-    return (a, b) => a[fieldName] > b[fieldName] ? 1 : -1;
+    sortByAny(histArray, field);
 }

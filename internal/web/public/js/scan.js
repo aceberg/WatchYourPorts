@@ -112,36 +112,9 @@ async function loadSavedPorts(addr1) {
         portArray = Object.values(portMap);
     }
 
-    displaySavedPorts();
-}
-
-function displaySavedPorts() {
-    document.getElementById('tBody').innerHTML = "";
-
-    for (let port of portArray){
-        html = createHTML(port);
-        document.getElementById('tBody').insertAdjacentHTML('beforeend', html);
-    }
+    displayArrayData(portArray);
 }
 
 function sortBy(field) {
-    console.log("Field =", field);
-
-    if (field != oldField) {
-        portArray.sort(byFieldDown(field));
-        oldField = field;
-    } else {
-        portArray.sort(byFieldUp(field));
-        oldField = '';
-    }
-
-    displaySavedPorts();
-}
-
-function byFieldUp(fieldName){
-    return (a, b) => a[fieldName] < b[fieldName] ? 1 : -1;
-}
-
-function byFieldDown(fieldName){
-    return (a, b) => a[fieldName] > b[fieldName] ? 1 : -1;
+    sortByAny(portArray, field);
 }
