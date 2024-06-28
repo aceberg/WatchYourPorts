@@ -50,9 +50,9 @@ func Gui(dirPath, nodePath string) {
 	router.StaticFS("/fs/", http.FS(pubFS)) // public
 
 	router.GET("/api/all", apiAllAddrs)              // api-port.go
-	router.GET("/api/addr/:addr/", apiAddrPortMap)   // api-port.go
-	router.GET("/api/port/:addr/:port", apiPortScan) // api-port.go
 	router.GET("/api/history", apiHistory)           // api-port.go
+	router.GET("/api/port/:addr", apiAddrPortMap)    // api-port.go
+	router.GET("/api/port/:addr/:port", apiPortScan) // api-port.go
 
 	router.GET("/", indexHandler)           // index.go
 	router.GET("/config/", configHandler)   // config.go

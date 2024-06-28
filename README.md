@@ -92,7 +92,7 @@ GET /api/all
 ```
 Returns all data about saved addresses in `json`.
 <details>
-  <summary>Response example for 1 address</summary>
+  <summary>Response example</summary>
   
 ```json
 {
@@ -107,7 +107,94 @@ Returns all data about saved addresses in `json`.
     },
 }
 ```
-</details> 
+</details><br>   
+
+```http
+GET /api/history
+```
+All history data from memory.
+<details>
+  <summary>Response example</summary>
+  
+```json
+{
+"192.168.2.3:8849": {
+        "Name": "OS",
+        "Addr": "192.168.2.3",
+        "Port": 8849,
+        "PortName": "MiniBoard",
+        "State": [
+            {
+                "Date": "2024-06-28 22:42:45",
+                "State": true
+            },
+            {
+                "Date": "2024-06-28 22:52:45",
+                "State": true
+            }
+        ],
+        "NowState": true
+    },
+}
+```
+</details><br> 
+
+```http
+GET /api/port/:addr
+```
+Returns current PortMap for `addr`.    
+<details>
+  <summary>Request example</summary>
+
+```bash
+curl http://0.0.0.0:8853/api/port/192.168.2.2
+```
+</details>
+<details>
+  <summary>Response example</summary>
+  
+```json
+{
+    "8850": {
+        "Name": "node-bootstrap",
+        "Port": 8850,
+        "State": true,
+        "Watch": true
+    },
+    "8851": {
+        "Name": "Exercise Diary",
+        "Port": 8851,
+        "State": true,
+        "Watch": true
+    },
+
+}
+```
+</details><br>  
+
+```http
+GET /api/port/:addr/:port
+```
+Gets state of one port
+<details>
+  <summary>Request example</summary>
+
+```bash
+curl http://0.0.0.0:8853/api/port/192.168.2.2/8844
+```
+</details>
+<details>
+  <summary>Response example</summary>
+  
+```json
+{
+    "Name": "git-syr",
+    "Port": 8844,
+    "State": true,
+    "Watch": true
+}
+```
+</details><br>  
 
 ## Thanks
 - All go packages listed in [dependencies](https://github.com/aceberg/watchyourports/network/dependencies)

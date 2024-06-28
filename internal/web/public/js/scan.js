@@ -111,7 +111,7 @@ async function loadSavedPorts() {
 
     addr = document.getElementById("pageAddr").value;
     
-    let url = '/api/addr/'+addr;
+    let url = '/api/port/'+addr;
     portMap = await (await fetch(url)).json();
     if (portMap != null) {
         portArray = Object.values(portMap);
