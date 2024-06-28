@@ -49,7 +49,7 @@ async function scanAddr() {
         document.getElementById("curPort").innerHTML = "Scanning port "+i;
 
         if ((port.State) && (!savedPorts.includes(port.Port.toString()))) {
-            html = createHTML(port, true);
+            html = createHTML(port, '', true);
             document.getElementById('tBody').insertAdjacentHTML('afterbegin', html);
         }
     }

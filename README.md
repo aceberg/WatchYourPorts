@@ -13,6 +13,7 @@ Open ports inventory for local servers. Exports data to InfluxDB2/Grafana
 - [Config](https://github.com/aceberg/watchyourports#config)
 - [Options](https://github.com/aceberg/watchyourports#options)
 - [Local network only](https://github.com/aceberg/watchyourports#local-network-only)
+- [API](https://github.com/aceberg/watchyourports#api)
 - [Thanks](https://github.com/aceberg/watchyourports#thanks)
 
 
@@ -85,6 +86,28 @@ docker run --name wyp \
 ```
 Or use [docker-compose](docker-compose-local.yml)
 
+## API
+```http
+GET /api/all
+```
+Returns all data about saved addresses in `json`.
+<details>
+  <summary>Response example for 1 address</summary>
+  
+```json
+{
+    "192.168.2.2": {
+        "Name": "SomeAddrName",
+        "Addr": "192.168.2.2",
+        "PortMap": {},  // All saved ports will be here
+        "Total": 0,
+        "Watching": 0,
+        "Online": 0,
+        "Offline": 0
+    },
+}
+```
+</details> 
 
 ## Thanks
 - All go packages listed in [dependencies](https://github.com/aceberg/watchyourports/network/dependencies)

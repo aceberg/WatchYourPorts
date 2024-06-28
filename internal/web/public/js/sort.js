@@ -22,6 +22,10 @@ function sortByAny(someArray, field) {
         oldField = '';
     }
 
+    if (field == 'State') {
+        someArray.sort(byFieldUp('Watch'));
+    }
+
     displayArrayData(someArray);
 }
 

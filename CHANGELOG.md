@@ -2,11 +2,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.1.2] - 2024-06-24
+## [0.1.2] - 2024-06-29
 ### Added
 - New themes
 - Sort on index page
 - Line numbers
+- Sort by State
 
 ### Changed
 - Upd to latest Bootstrap and Icons
