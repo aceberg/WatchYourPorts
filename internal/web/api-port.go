@@ -37,3 +37,29 @@ func apiHistory(c *gin.Context) {
 
 	c.IndentedJSON(http.StatusOK, histAll)
 }
+
+func apiAllAddrs(c *gin.Context) {
+
+	for key, value := range allAddrs {
+		value.Total = 0
+		value.Watching = 0
+		value.Online = 0
+		value.Offline = 0
+
+		for _, p := range value.PortMap {
+			value.Total++
+			if p.Watch {
+				value.Watching++
+				if p.State {
+					value.Online++
+				} else {
+					value.Offline++
+				}
+			}
+		}
+
+		allAddrs[key] = value
+	}
+
+	c.IndentedJSON(http.StatusOK, allAddrs)
+}

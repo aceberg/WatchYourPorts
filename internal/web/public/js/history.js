@@ -1,9 +1,8 @@
-var oldField = '';
 var histArray = {};
 
 loadHistory();
 
-function createHTML(hist) {
+function createHTML(hist, i) {
     
     let allState = "";
     let color = "";
@@ -19,6 +18,7 @@ function createHTML(hist) {
 
     let html = `
     <tr>
+        <td style="opacity: 45%;">${i}.</td>
         <td><a href="/scan/?addr=${hist.Addr}">${hist.Name}</a></td>
         <td><a href="/scan/?addr=${hist.Addr}">${hist.Addr}</a></td>
         <td><a href="http://${hist.Addr}:${hist.Port}">${hist.Port}</a></td>

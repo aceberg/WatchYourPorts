@@ -44,7 +44,7 @@ Configuration can be done through `config.yaml` file or GUI, or environment vari
 | --------  | ----------- | ------- |
 | HOST | Listen address | 0.0.0.0 |
 | PORT   | Port for web GUI | 8853 |
-| THEME | Any theme name from https://bootswatch.com in lowcase or [additional](https://github.com/aceberg/aceberg-bootswatch-fork) (emerald, grass, sand)| grass |
+| THEME | Any theme name from https://bootswatch.com in lowcase or [additional](https://github.com/aceberg/aceberg-bootswatch-fork) | grass |
 | COLOR | Background color: light or dark | dark |
 | TIMEOUT | How often watched ports are scanned (minutes) | 10 |
 | HIST_TRIM | How many port states are saved in memory and displayed | 90 |

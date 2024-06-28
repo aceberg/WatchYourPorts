@@ -5,9 +5,11 @@ All notable changes to this project will be documented in this file.
 ## [0.1.2] - 2024-06-24
 ### Added
 - New themes
+- Sort on index page
+- Line numbers
 
 ### Changed
-- Upd to latest Bottstrap and Icons
+- Upd to latest Bootstrap and Icons
 - Deduplicated JS
 
 ## [0.1.1] - 2024-06-24

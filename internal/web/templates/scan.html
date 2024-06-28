@@ -61,6 +61,8 @@
       <form class="input-group">
         <input id="begin" type="text" class="form-control" placeholder="1">
         <input id="end" type="text" class="form-control" placeholder="65535">
+        <!-- To get from JS -->
+        <input type="hidden" id="pageAddr" value="{{ .OneAddr.Addr }}"> 
         <button onclick="scanAddr()" type="button" class="btn btn-primary">Scan</button>
       </form>
       <div style="display: flex; justify-content: space-between; visibility: hidden;" id="stopBtn">
@@ -79,10 +81,11 @@
             <div class="col-lg-11 table-responsive mb-4">
               <table class="table table-striped">
                 <thead>
-                  <th>Name <i class="bi bi-sort-down-alt" onclick="sortBy('Name')"></i></th>
-                  <th>Port <i class="bi bi-sort-down-alt" onclick="sortBy('Port')"></i></th>
+                  <th style="width: 3em;"></th>
+                  <th style="white-space: nowrap;">Name <i class="bi bi-sort-down-alt" onclick="sortBy('Name')"></i></th>
+                  <th style="white-space: nowrap;">Port <i class="bi bi-sort-down-alt" onclick="sortBy('Port')"></i></th>
                   <th>State</th>
-                  <th>Watch <i class="bi bi-sort-down-alt" onclick="sortBy('Watch')"></i></th>
+                  <th style="white-space: nowrap;">Watch <i class="bi bi-sort-down-alt" onclick="sortBy('Watch')"></i></th>
                   <th>Del</th>
                 </thead>
                 <tbody id="tBody"></tbody>
@@ -97,10 +100,6 @@
     </div>
   </div>
 </div>
-
-<script>
-  loadSavedPorts('{{ .OneAddr.Addr }}', '{{ .OneAddr.PortMap }}')
-</script>
 
 {{ template "footer.html" }}
 {{ end }}

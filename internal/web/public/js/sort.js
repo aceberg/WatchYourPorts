@@ -1,8 +1,12 @@
+var oldField = '';
+
 function displayArrayData(someArray) {
     document.getElementById('tBody').innerHTML = "";
 
+    let i = 0;
     for (let item of someArray){
-        html = createHTML(item);
+        i = i + 1;
+        html = createHTML(item, i);
         document.getElementById('tBody').insertAdjacentHTML('beforeend', html);
     }
 }

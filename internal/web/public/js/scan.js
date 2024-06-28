@@ -2,7 +2,11 @@ var addr = '';
 var stop = false;
 var portMap = {};
 var portArray = [];
-var oldField = '';
+
+// Run, when page loadad
+window.addEventListener('load', function() {
+    loadSavedPorts();
+});
 
 function delRow(id) {
     document.getElementById(id).innerHTML = "";
@@ -53,7 +57,7 @@ async function scanAddr() {
     document.getElementById('stopBtn').style.visibility = "hidden";
 }
 
-function createHTML(port, found) {
+function createHTML(port, i, found) {
     let state = ``;
     let checked = ``;
     let sup = ``;
@@ -76,6 +80,7 @@ function createHTML(port, found) {
 
     let html = `
     <tr id="row${port.Port}">
+        <td style="opacity: 45%;">${i}.</td>
         <td>
             <input name="name" type="text" class="form-control" value="${port.Name}">
         </td>
@@ -102,9 +107,9 @@ function createHTML(port, found) {
     return html;
 }
 
-async function loadSavedPorts(addr1) {
+async function loadSavedPorts() {
 
-    addr = addr1;
+    addr = document.getElementById("pageAddr").value;
     
     let url = '/api/addr/'+addr;
     portMap = await (await fetch(url)).json();
@@ -112,9 +117,9 @@ async function loadSavedPorts(addr1) {
         portArray = Object.values(portMap);
     }
 
-    displayArrayData(portArray);
+    displayArrayData(portArray); // sort.js
 }
 
 function sortBy(field) {
-    sortByAny(portArray, field);
+    sortByAny(portArray, field); // sort.js
 }

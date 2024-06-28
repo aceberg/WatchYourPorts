@@ -60,7 +60,5 @@ type GuiData struct {
 	Config  Conf
 	Themes  []string
 	Version string
-	AddrMap map[string]AddrToScan
 	OneAddr AddrToScan
-	History map[string]HistData
 }
