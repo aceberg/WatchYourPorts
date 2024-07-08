@@ -8,7 +8,7 @@
 #    $ADDR is IP or domain name of the server, without http(s):// prefix
 #    It will be used to ping ports
 #    2. Paste the output to hosts.yaml file in WYP config dir
-#    3. You can add ad many servers to hosts.yaml, as you want
+#    3. You can add as many servers to hosts.yaml, as you want
 
 docker ps -a --format "{{.Names}}">/tmp/wyp-docker.txt
 
