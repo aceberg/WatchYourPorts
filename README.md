@@ -39,7 +39,7 @@ Or use [docker-compose.yml](docker-compose.yml)
 
 
 ## Login
-You can limit access to WYP with [ForAuth](https://github.com/aceberg/ForAuth). Here is an axample: [docker-compose-auth.yml](docker-compose-auth.yml)   
+You can limit access to WYP with [ForAuth](https://github.com/aceberg/ForAuth). Here is an example: [docker-compose-auth.yml](docker-compose-auth.yml)   
 Also, SSO tools like Authelia should work.
 
 ## Import ports from Docker
