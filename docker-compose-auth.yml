@@ -1,0 +1,31 @@
+version: "3"
+services:
+  wyp:
+    image: aceberg/watchyourports
+    restart: unless-stopped
+    volumes:
+    - ~/.dockerdata/WatchYourPorts:/data/WatchYourPorts
+    environment:
+      TZ: Asia/Novosibirsk    # required, default: ""
+      HOST: "0.0.0.0"         # optional, default: 0.0.0.0
+      PORT: "8853"            # optional, default: 8853
+      THEME: "grass"          # optional, default: grass
+      COLOR: "dark"           # optional, default: dark
+  
+  forauth:
+    image: aceberg/forauth      
+    restart: unless-stopped
+    ports:
+    - 8800:8800 # Proxy port
+    - 8801:8801 # Config port
+    volumes:
+    - ~/.dockerdata/forauth:/data/ForAuth
+    environment:
+      TZ: Asia/Novosibirsk          # required: needs your TZ for correct time
+      FA_TARGET: "wyp:8853"         # optional: path to wyp host:port  
+      FA_AUTH: "true"               # optional: true - enabled, default: false
+      FA_AUTH_EXPIRE: 7d            # optional: expiration time, default: 7d
+      FA_AUTH_PASSWORD: "$$2a$$10$$wGLUHXh2cRN1257uGg1s5eZvYgnjw8wB9vAcfcHqqqrxm5hvBqAzK" 
+      # WORNING! If password is set as environment variable, every '$' character must be escaped with another '$', like this '$$'
+      # optional: password encrypted with bcrypt, how-to: https://github.com/aceberg/ForAuth/blob/main/docs/BCRYPT.md 
+      FA_AUTH_USER: user            # optional: username

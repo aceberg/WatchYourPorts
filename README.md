@@ -10,6 +10,7 @@
 Open ports inventory for local servers. Exports data to InfluxDB2/Grafana 
 
 - [Quick start](https://github.com/aceberg/watchyourports#quick-start)
+- [Login](https://github.com/aceberg/watchyourports#login)
 - [Import ports from Docker](https://github.com/aceberg/watchyourports#import-ports-from-docker)
 - [Config](https://github.com/aceberg/watchyourports#config)
 - [Options](https://github.com/aceberg/watchyourports#options)
@@ -36,6 +37,10 @@ aceberg/watchyourports
 ```
 Or use [docker-compose.yml](docker-compose.yml)
 
+
+## Login
+You can limit access to WYP with [ForAuth](https://github.com/aceberg/ForAuth). Here is an axample: [docker-compose-auth.yml](docker-compose-auth.yml)   
+Also, SSO tools like Authelia should work.
 
 ## Import ports from Docker
 1. Run [docker-export.sh](configs/docker-export.sh) on a server, where Docker is installed. `$ADDR` is IP or domain name of the server, without `http(s)://` prefix. It will be used to ping ports.
